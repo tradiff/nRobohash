@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  robohash:
+    image: robohash
+    build:
+      context: .
+      dockerfile: RoboHash/Dockerfile

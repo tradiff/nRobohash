@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="robots">
+
+    </div>
+    <script>
+        var robotsDiv = document.getElementById('robots');
+        var i = 0;
+        setInterval(function () {
+            console.log(i);
+            var img = document.createElement('img');
+            img.src = 'api/robot/' + i++;
+
+            robotsDiv.insertBefore(img, robotsDiv.childNodes[0]);
+            if (robotsDiv.childNodes.length > 100) {
+                robotsDiv.removeChild(robotsDiv.childNodes[100]);
+            }
+        }, 200);
+    </script>
+</body>
+</html>
