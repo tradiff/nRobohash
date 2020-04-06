@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SixLabors.ImageSharp;
 
 namespace RoboHash.Services
 {
@@ -31,7 +32,7 @@ namespace RoboHash.Services
             return color;
         }
 
-        public Image<Rgba32> Assemble(List<long> hashArray, string color, int width, int height)
+        public Image Assemble(List<long> hashArray, string color, int width, int height)
         {
             string assetPath = Directory.GetCurrentDirectory();
             // first get a list of parts of our robot
@@ -43,7 +44,7 @@ namespace RoboHash.Services
             foreach (var roboPart in roboParts)
             {
                 var image = Image.Load(roboPart);
-                finalImage.Mutate(ctx => ctx.Blend(image, 100));
+                finalImage.Mutate(ctx => ctx.DrawImage(image, 1));
             }
 
             finalImage.Mutate(x => x.Resize(width, height));

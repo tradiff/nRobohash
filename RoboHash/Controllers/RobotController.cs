@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RoboHash.Services;
 using SixLabors.ImageSharp;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace RoboHash.Controllers
 {
@@ -41,9 +40,8 @@ namespace RoboHash.Controllers
             var color = _robotService.GetColor(hashArray[0]);
 
             var assembleResults = _robotService.Assemble(hashArray, color, width, height);
-
             Stream outputStream = new MemoryStream();
-            assembleResults.Save(outputStream, ImageFormats.Png);
+            assembleResults.SaveAsPng(outputStream);
             outputStream.Seek(0, SeekOrigin.Begin);
             return File(outputStream, "image/png");
         }
